@@ -4,6 +4,7 @@
 import psutil
 
 otstup = "%s %5s    %s %-35s    %s %-5s"
+printt = "%s  %s"
 
 def collect_pids():
     pids = []
@@ -24,13 +25,23 @@ def proc_info(arg):
         if theSum > 0:
             proc_info.extend([psutil.Process(pid=arg).pid, psutil.Process(pid=arg).name(), theSum])
     return proc_info
-    
+
 def sort_swap_usage():
     result = []
     for p in collect_pids():
         if proc_info(p):
             result.extend([proc_info(p)])
     return sorted(result, key=lambda x: x[2])
-    
+
+def calc_total_swap():
+    t = []
+    for s in collect_pids():
+        if proc_info(s):
+            t.append(proc_info(s)[2])
+    swap = (str(sum(t) / 1024 ) + ' K')
+    print "Total swap usage: %s" % swap
+
 for s in sort_swap_usage():
     print(otstup % ("Pid:", s[0], "Process name:", s[1], "Swap usage:", str(s[2] / 1024 ) + ' K'))
+
+calc_total_swap()
