@@ -3,7 +3,7 @@
 
 import psutil
 
-otstup = "%s %s;  %s %s;  %s %s"
+otstup = "%s %5s    %s %-35s    %s %-5s"
 
 def collect_pids():
     pids = []
@@ -11,7 +11,7 @@ def collect_pids():
         pids.append(p)
     return pids
 
-def calc_proc_swap(arg):
+def calc_swap(arg):
     result = []
     proc = psutil.Process(pid=arg).memory_maps(grouped=False)
     if proc:
@@ -23,6 +23,5 @@ def calc_proc_swap(arg):
         if theSum > 0:
             print(otstup % ("Pid:", psutil.Process(pid=arg).pid, "Process name:", psutil.Process(pid=arg).name(), "Swap usage:", str(theSum / 1024) + 'K'))
 
-# final print
 for i in collect_pids():
-    calc_proc_swap(i)
+    calc_swap(i)
