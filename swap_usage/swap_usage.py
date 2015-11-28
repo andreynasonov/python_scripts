@@ -33,5 +33,4 @@ def sort_swap_usage():
     return sorted(result, key=lambda x: x[2])
     
 for s in sort_swap_usage():
-    print(otstup % ("Pid:", s[0], "Process name:", s[1], "Swap usage:", s[2]))
-
+    print(otstup % ("Pid:", s[0], "Process name:", s[1], "Swap usage:", str(s[2] / 1024 ) + ' K'))
