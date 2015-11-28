@@ -4,7 +4,6 @@
 import psutil
 
 otstup = "%s %5s    %s %-35s    %s %-5s"
-printt = "%s  %s"
 
 def collect_pids():
     pids = []
